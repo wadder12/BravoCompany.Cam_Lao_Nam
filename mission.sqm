@@ -8,7 +8,7 @@ class EditorData
 	toggles=513;
 	class ItemIDProvider
 	{
-		nextID=493;
+		nextID=495;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=234;
+		nextID=243;
 	};
 	class Camera
 	{
-		pos[]={1927.8231,201.33133,4355.895};
-		dir[]={-0.73742634,-0.62898594,-0.24612814};
-		up[]={-0.59663087,0.77741665,-0.19913536};
-		aside[]={-0.31659746,1.4901161e-008,0.94855988};
+		pos[]={1867.9443,34.835976,3118.9604};
+		dir[]={0.31133589,-0.92074233,0.23522878};
+		up[]={0.73463482,0.39015782,0.55505103};
+		aside[]={0.60283375,2.9744115e-007,-0.79788053};
 	};
 };
 binarizationWanted=0;
@@ -37,15 +37,18 @@ addons[]=
 	"A3_Modules_F_Curator_Curator",
 	"A3_Modules_F",
 	"A3_Characters_F",
+	"ace_explosives",
 	"structures_f_vietnam_c",
 	"modules_f_vietnam",
-	"objects_f_vietnam_c"
+	"objects_f_vietnam_c",
+	"CUP_Weapons_AmmoBoxes",
+	"A3_Modules_F_ObjectModifiers"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=9;
+		items=11;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -90,30 +93,43 @@ class AddonsMetaData
 		};
 		class Item6
 		{
+			className="ace_explosives";
+			name="ACE3 - Explosives";
+			author="ACE-Team";
+			url="https://ace3.acemod.org/";
+		};
+		class Item7
+		{
 			className="structures_f_vietnam_c";
 			name="structures_f_vietnam_c";
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
-		class Item7
+		class Item8
 		{
 			className="modules_f_vietnam";
 			name="modules_f_vietnam";
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
-		class Item8
+		class Item9
 		{
 			className="objects_f_vietnam_c";
 			name="objects_f_vietnam_c";
 			author="Savage Game Design";
 			url="https://www.arma3.com";
 		};
+		class Item10
+		{
+			className="CUP_Weapons_AmmoBoxes";
+			name="CUP_Weapons_AmmoBoxes";
+		};
 	};
 };
 dlcs[]=
 {
-	"VN"
+	"VN",
+	"CUP_Weapons"
 };
 randomSeed=2078020;
 class ScenarioData
@@ -132,10 +148,23 @@ class ScenarioData
 };
 class CustomAttributes
 {
-	class Category0
+	class Category1
 	{
 		name="Scenario";
 		class Attribute0
+		{
+			property="cba_settings_hasSettingsFile";
+			expression="false";
+			class Value
+			{
+				class data
+				{
+					singleType="BOOL";
+					value=1;
+				};
+			};
+		};
+		class Attribute1
 		{
 			property="EnableDebugConsole";
 			expression="true";
@@ -148,7 +177,7 @@ class CustomAttributes
 				};
 			};
 		};
-		nAttributes=1;
+		nAttributes=2;
 	};
 };
 class Mission
@@ -176,7 +205,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=18;
+		items=20;
 		class Item0
 		{
 			dataType="Layer";
@@ -507,7 +536,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={2552.6787,-0.55760312,2959.0273};
+						position[]={2552.6787,-0.55760288,2959.0273};
 						angles[]={0,2.4245238,0};
 					};
 					side="Empty";
@@ -517,7 +546,7 @@ class Mission
 					};
 					id=84;
 					type="Land_ClutterCutter_small_F";
-					atlOffset=1.9124885;
+					atlOffset=1.9124887;
 				};
 				class Item14
 				{
@@ -1060,7 +1089,7 @@ class Mission
 					type="o_support";
 					colorName="ColorEAST";
 					id=134;
-					atlOffset=21.560934;
+					atlOffset=22.365685;
 				};
 				class Item13
 				{
@@ -4119,12 +4148,11 @@ class Mission
 					dataType="Logic";
 					class PositionInfo
 					{
-						position[]={1875.0502,3.0835156,3138.1208};
-						angles[]={0.055941612,0.88177568,6.2491984};
+						position[]={1875.05,3.0835207,3138.1211};
+						angles[]={0.055937801,0.8817752,6.2492037};
 					};
 					id=7;
 					type="ModuleCuratorSetAttributesPlayer_F";
-					atlOffset=2.3841858e-007;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -4188,7 +4216,7 @@ class Mission
 								class data
 								{
 									singleType="STRING";
-									value="";
+									value="Squad Leader";
 								};
 							};
 						};
@@ -4318,6 +4346,19 @@ class Mission
 							{
 								class Attribute0
 								{
+									property="ace_isMedic";
+									expression="if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+									class Value
+									{
+										class data
+										{
+											singleType="SCALAR";
+											value=2;
+										};
+									};
+								};
+								class Attribute1
+								{
 									property="pitch";
 									expression="_this setpitch _value;";
 									class Value
@@ -4329,7 +4370,7 @@ class Mission
 										};
 									};
 								};
-								nAttributes=1;
+								nAttributes=2;
 							};
 						};
 						class Item1
@@ -4356,6 +4397,19 @@ class Mission
 							{
 								class Attribute0
 								{
+									property="ace_isMedic";
+									expression="if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+									class Value
+									{
+										class data
+										{
+											singleType="SCALAR";
+											value=2;
+										};
+									};
+								};
+								class Attribute1
+								{
 									property="pitch";
 									expression="_this setpitch _value;";
 									class Value
@@ -4367,7 +4421,7 @@ class Mission
 										};
 									};
 								};
-								nAttributes=1;
+								nAttributes=2;
 							};
 						};
 					};
@@ -5368,23 +5422,35 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={1881.0101,2.9237344,3121.1694};
-								angles[]={0,0.88177568,0};
+								position[]={1881.01,2.9237144,3121.1689};
+								angles[]={0,0.8817752,0};
 							};
 							side="West";
 							flags=5;
 							class Attributes
 							{
 								rank="CORPORAL";
-								description="MedEvac Medic";
+								description="Medic";
 								isPlayable=1;
 							};
 							id=43;
 							type="B_medic_F";
-							atlOffset=-4.7683716e-007;
 							class CustomAttributes
 							{
 								class Attribute0
+								{
+									property="speaker";
+									expression="_this setspeaker _value;";
+									class Value
+									{
+										class data
+										{
+											singleType="STRING";
+											value="Male08ENG";
+										};
+									};
+								};
+								class Attribute1
 								{
 									property="pitch";
 									expression="_this setpitch _value;";
@@ -5397,7 +5463,7 @@ class Mission
 										};
 									};
 								};
-								nAttributes=1;
+								nAttributes=2;
 							};
 						};
 					};
@@ -6030,6 +6096,64 @@ class Mission
 			id=492;
 			type="vn_b_prop_fmradio_01";
 			atlOffset=0.91749763;
+		};
+		class Item18
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2098.6958,29.809401,4069.116};
+				angles[]={0.015998369,0,6.2671871};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=493;
+			type="CUP_BOX_TKGUE_Wps_F";
+			atlOffset=-0.00012588501;
+		};
+		class Item19
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={2101.6416,28.485672,4070.7449};
+			};
+			id=494;
+			type="ModuleAmmo_F";
+			atlOffset=-9.5367432e-006;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ModuleAmmo_F_Value";
+					expression="_this setVariable ['Value',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="SCALAR";
+							value=1;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="ModuleAmmo_F_Units";
+					expression="_this setVariable ['Units',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="1";
+						};
+					};
+				};
+				nAttributes=2;
+			};
 		};
 	};
 	class Connections
